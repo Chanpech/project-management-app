@@ -12,6 +12,7 @@ const app = express();
 // Connect to database
 connectDB();
 
+// Allow all origins
 app.use(cors()); 
 
 app.use(
@@ -19,7 +20,9 @@ app.use(
   graphqlHTTP({
     schema,
     graphiql: process.env.NODE_ENV === 'development',
-  })
+  }),
+  cors({
+  origin: process.env.ORIGIN_FRONT}),
 );
 
 app.listen(port, console.log(`Server running on port ${port}`));
